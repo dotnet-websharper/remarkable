@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WebSharper.Remarkable.Sample</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="Content/WebSharper.Remarkable.Sample.css" />
+    <style>
+        /* Don't show the not-yet-loaded templates */
+        [ws-template], [ws-children-template] { display: none; }
+    </style>
+    <script type="text/javascript" src="Content/WebSharper.Remarkable.Sample.head.js"></script>
+</head>
+<body>
+    <div id="main">
+        <h1>Websharper.Remarkable Sample</h1>
+       <form>
+            <label>Type markdown text here</label><br>
+            <textarea id="inp" rows="10" cols="60"></textarea><br>
+            <input id="btn" type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="result">
+
+    </div>
+    <script type="text/javascript" src="Content/WebSharper.Remarkable.Sample.min.js"></script>
+</body>
+</html>

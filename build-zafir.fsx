@@ -24,9 +24,20 @@ let tests =
                 r.NuGet("Zafir.UI.Next").Latest(true).Reference()
             ])
 
+let renderingtests =
+    bt.Zafir.BundleWebsite("WebSharper.Remarkable.RenderingTest")
+        .SourcesFromProject()
+        .Embed([])
+        .References(fun r ->
+            [
+                r.Project(main)
+                r.NuGet("Zafir.UI.Next").Latest(true).Reference()
+            ])
+
 bt.Solution [
     main
     tests
+    renderingtests
 
     bt.NuGet.CreatePackage()
         .Configure(fun c ->

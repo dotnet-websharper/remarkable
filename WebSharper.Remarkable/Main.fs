@@ -4,6 +4,9 @@ open WebSharper
 open WebSharper.InterfaceGenerator
 
 module Definition =
+    let Remarkable = Class "Remarkable"
+    let StateCore = Class "StateCore"
+
 
     let Options =
         Pattern.Config "Options"{
@@ -17,21 +20,31 @@ module Definition =
                 "linkify", T<bool>
                 "linkTarget", T<string>
 
-                "typographer", T<string>
+                "typographer", T<bool>
                 "quotes", T<string>
                 "highlight", T<string*string> ^-> T<string>
                 "maxNesting", T<int>
             ]
         }
-        
-    let Remarkable = 
-        Class "Remarkable"
+    let Plugin = (Remarkable * Options) ^-> T<unit>
+    Remarkable
         |+> Static [
             Constructor (T<unit> + Options + T<string>)
         ]
         |+> Instance [
             "set" => Options ^-> T<unit>
-        ]
+            "use" => (Plugin * Options) ^-> Remarkable
+            "parse" => (T<string> * T<obj>) ^-> T<string[]>
+            "render" => (T<string> * !? T<obj>) ^-> T<string>
+            "parseInline" => (T<string> * T<obj>) ^-> T<string[]>
+            "renderInline" => (T<string> * !? T<obj>) ^-> T<string>
+        ]|> ignore
+
+ 
+ (*   StateCore
+        |+> Static [
+            Constructor (Remarkable * T<string> * T<obj>)
+        ] |> ignore *)
 
     let Assembly =
         Assembly [
@@ -42,6 +55,7 @@ module Definition =
             Namespace "WebSharper.Remarkable" [
                 Options
                 Remarkable
+            //    StateCore
             ]
         ]
 
