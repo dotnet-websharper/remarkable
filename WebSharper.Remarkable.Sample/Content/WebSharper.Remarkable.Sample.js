@@ -425,7 +425,7 @@ if (!console) {
  {
   var remarkableConfig,md,rvInput,a,a$1,a$2,a$3,a$4,a$5,a$6,a$7,v,f;
   remarkableConfig={};
-  remarkableConfig.html=false;
+  remarkableConfig.html=true;
   remarkableConfig.xhtmlOut=false;
   remarkableConfig.breaks=false;
   remarkableConfig.langPrefix="language-";

@@ -2,28 +2,18 @@ namespace WebSharper.Remarkable.RenderingTest
 
 open WebSharper
 open WebSharper.JavaScript
-open WebSharper.JQuery
 open WebSharper.Remarkable
 open WebSharper.UI.Next.Client
-open WebSharper.UI.Next.Templating
-open WebSharper.UI.Next.Formlets
 open WebSharper.UI.Next
-open WebSharper.Html.Client
-open WebSharper.UI.Next.Client
 open WebSharper.UI.Next.Html
 
 [<JavaScript>]
 module Client =
-    
-
-    
-
-
     [<SPAEntryPoint>]
     let Main () =
         //basic example: how to configure Remarkable
         let remarkableConfig = new WebSharper.Remarkable.Options()
-        remarkableConfig.Html <- false //true -> enable html tags in text
+        remarkableConfig.Html <- true //true -> enable html tags in text
         remarkableConfig.XhtmlOut <- false //true -> produce xhtml output
         remarkableConfig.Breaks <- false //true -> newlines in paragraphs are rendered as <br>
         remarkableConfig.LangPrefix <- "language-" //css class language prefix for fenced code blocks

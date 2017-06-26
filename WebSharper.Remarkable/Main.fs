@@ -5,7 +5,7 @@ open WebSharper.InterfaceGenerator
 
 module Definition =
     let Remarkable = Class "Remarkable"
-    let StateCore = Class "StateCore"
+  //  let StateCore = Class "StateCore"
 
 
     let Options =

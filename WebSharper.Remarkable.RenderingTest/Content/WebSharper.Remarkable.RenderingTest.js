@@ -1467,11 +1467,12 @@ if (!console) {
  };
  Attrs.AppendTree=function(a,b)
  {
-  return a===null?b:b===null?a:new AttrProxy({
+  var x;
+  return a===null?b:b===null?a:(x=new AttrProxy({
    $:2,
    $0:a,
    $1:b
-  });
+  }),(Attrs.SetFlags(x,Attrs.Flags(a)|Attrs.Flags(b)),x));
  };
  Attrs.Updates=function(dyn)
  {
@@ -1482,6 +1483,14 @@ if (!console) {
   {
    return x$1.NChanged();
   },d,View.Map2Unit,x);
+ };
+ Attrs.SetFlags=function(a,f)
+ {
+  a.flags=f;
+ };
+ Attrs.Flags=function(a)
+ {
+  return(a!==null?a.hasOwnProperty("flags"):false)?a.flags:0;
  };
  Attrs.Insert=function(elem,tree)
  {
@@ -1559,10 +1568,6 @@ if (!console) {
   {
    return $1.NGetExitAnim($2);
   });
- };
- Attrs.Flags=function(a)
- {
-  return(a!==null?a.hasOwnProperty("flags"):false)?a.flags:0;
  };
  Attrs.GetAnim=function(dyn,f)
  {
