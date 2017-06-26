@@ -10,17 +10,19 @@
         [ws-template], [ws-children-template] { display: none; }
     </style>
     <script type="text/javascript" src="Content/WebSharper.Remarkable.Sample.head.js"></script>
+    <style>
+        .input {
+            width: 750px;
+        }
+        .output {
+            min-height: 100px;
+            width: 750px;
+            background-color: whitesmoke;
+        }
+    </style>
 </head>
 <body>
-    <div id="main">
-        <h1>Websharper.Remarkable Sample</h1>
-       <form>
-            <label>Type markdown text here</label><br>
-            <textarea id="inp" rows="10" cols="60"></textarea><br>
-            <input id="btn" type="submit" value="Submit">
-        </form>
-    </div>
-    <div id="result">
+    <div id="body">
 
     </div>
     <script type="text/javascript" src="Content/WebSharper.Remarkable.Sample.min.js"></script>
