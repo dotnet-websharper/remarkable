@@ -70,10 +70,6 @@ let MdFull = new Remarkable(“full”)
 
 Syntax highlighting can be applied to fenced code blocks with the highlight option. For more details see the [original documentation]( https://github.com/jonschlinkert/remarkable).
 
-## Manage rules
-
-__TODO__
-
 ## Typographer
 
 ```fsharp
@@ -96,9 +92,6 @@ let Md = new Remarkable(Config)
 // -- ? &ndash;, --- ? &mdash;
 
 ```
-
-## Plugins
-__TODO__
 
 # Differences to the original library
 
