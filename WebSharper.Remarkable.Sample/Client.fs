@@ -9,21 +9,28 @@ open WebSharper.UI.Next.Html
 
 [<JavaScript>]
 module Client =
+
     [<SPAEntryPoint>]
     let Main () =
         //basic example: how to configure Remarkable
-        let remarkableConfig = new WebSharper.Remarkable.Options()
-        remarkableConfig.Html <- true //true -> enable html tags in text
-        remarkableConfig.XhtmlOut <- false //true -> produce xhtml output
-        remarkableConfig.Breaks <- false //true -> newlines in paragraphs are rendered as <br>
-        remarkableConfig.LangPrefix <- "language-" //css class language prefix for fenced code blocks
-        remarkableConfig.Linkify <- true //true -> autoconvert link-like texts to links
-        remarkableConfig.LinkTarget <- "" //target to open link in
-        remarkableConfig.Typographer <- false //true -> do typographic repalacements
-        remarkableConfig.Quotes <- "'“”‘’'"
+        let RemarkableConfig = new Options()
+        RemarkableConfig.Html <- true //true -> enable html tags in text
+        RemarkableConfig.XhtmlOut <- false //true -> produce xhtml output
+        RemarkableConfig.Breaks <- false //true -> newlines in paragraphs are rendered as <br>
+        RemarkableConfig.LangPrefix <- "language-" //css class language prefix for fenced code blocks
+        RemarkableConfig.Linkify <- true //true -> autoconvert link-like texts to links
+        RemarkableConfig.LinkTarget <- "" //target to open link in
+
+        RemarkableConfig.Typographer <- false //true -> do typographic repalacements
+        RemarkableConfig.Quotes <- "'“”‘’'"
 
         
-        let md = new Remarkable.Remarkable(remarkableConfig)
+        let Md = new Remarkable(RemarkableConfig)
+
+ //       .Set method takes an option and returns with unit
+ //       RemarkableConfig.Html <- false
+ //       Md.Set(RemarkableConfig)
+
 
         let rvInput = Var.Create ""
 
@@ -33,9 +40,8 @@ module Client =
             Doc.InputArea [attr.``class`` "input"; attr.rows "20"] rvInput
             hr[]
             h4 [text "Result"]
-            divAttr[attr.``class`` "output"][rvInput.View.Doc(md.Render >> text)]
+            divAttr[attr.``class`` "output"][rvInput.View.Doc(Md.Render >> Doc.Verbatim)]
         ]
         |> Doc.RunById "body"
-        
 
         

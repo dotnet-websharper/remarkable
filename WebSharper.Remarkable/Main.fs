@@ -34,10 +34,10 @@ module Definition =
         |+> Instance [
             "set" => Options ^-> T<unit>
             "use" => (Plugin * Options) ^-> Remarkable
-            "parse" => (T<string> * T<obj>) ^-> T<string[]>
+//            "parse" => (T<string> * T<obj>) ^-> T<string[]>
             "render" => (T<string> * !? T<obj>) ^-> T<string>
-            "parseInline" => (T<string> * T<obj>) ^-> T<string[]>
-            "renderInline" => (T<string> * !? T<obj>) ^-> T<string>
+//            "parseInline" => (T<string> * T<obj>) ^-> T<string[]>
+//            "renderInline" => (T<string> * !? T<obj>) ^-> T<string>
         ]|> ignore
 
  
