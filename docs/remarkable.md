@@ -14,13 +14,13 @@ You can either configure it, or just start using it with its default settings.
 
 ## The options are:
 * __Html__: Enable HTML tags in source (default: false)
-* __XhtmlOut__: Use ‘/’ to close single tags (for example <br/>, default: false)
-* __Breaks__: Convert ‘\n’ in paragraphs into <br> (default: false)
-* __LangPrefix__: CSS language prefix for fenced blocks (default: ‘language-’)
+* __XhtmlOut__: Use â€˜/â€™ to close single tags (for example <br/>, default: false)
+* __Breaks__: Convert â€˜\nâ€™ in paragraphs into <br> (default: false)
+* __LangPrefix__: CSS language prefix for fenced blocks (default: â€˜language-â€™)
 * __Linkify__: Autoconvert URL-like text to links (default: false)
 * __Typographer__: Enable some language neutral-replacement (default: false)
-* __Quotes__: Set doubles to '«»' for Russian, '„“' for German. (default: '“”‘’')
-* __Highlight__: Highlighter function. Should return escaped HTML, or ‘’ if the source string is not changed (default: function () {return ‘’;})
+* __Quotes__: Set doubles to 'Â«Â»' for Russian, 'â€â€œ' for German. (default: 'â€œâ€â€˜â€™')
+* __Highlight__: Highlighter function. Should return escaped HTML, or â€˜â€™ if the source string is not changed (default: function () {return â€˜â€™;})
 
 ### Sample:
 
@@ -37,9 +37,9 @@ RemarkableConfig.Linkify <- true
 Md = new Remarkable(RemarkableConfig)
 
 //The render function will parse and then render the input string, returning a 
-Md.Render(“# Hello world!”) //The .Render function will return with the “<h1>Hello world!</h1>” string
+Md.Render(â€œ# Hello world!â€) //The .Render function will return with the â€œ<h1>Hello world!</h1>â€ string
 |> Doc.Verbatim
-|> Doc.RunById “main”
+|> Doc.RunById â€œmainâ€
 
 ```
 
@@ -60,10 +60,10 @@ Remarkable contains some presets. They make it easier and more convenient to con
 ```fsharp
 
 //strict commonmark mode
-let MdCommonmark = new Remarkable(“commonmark”)
+let MdCommonmark = new Remarkable(â€œcommonmarkâ€)
 
 //enable all available rules
-let MdFull = new Remarkable(“full”)
+let MdFull = new Remarkable(â€œfullâ€)
 
 ```
 ## Syntax highlighting
@@ -80,14 +80,14 @@ let Md = new Remarkable(Config)
 
 // Replacements
 //
-// '' ? ‘’
-// "" ? “”. Set '«»' for Russian, '„“' for German, empty to disable
-// (c) (C) ? ©
-// (tm) (TM) ? ™
-// (r) (R) ? ®
-// +- ? ±
-// (p) (P) -> §
-// ... ? … (also ?.... ? ?.., !.... ? !..)
+// '' ? â€˜â€™
+// "" ? â€œâ€. Set 'Â«Â»' for Russian, 'â€â€œ' for German, empty to disable
+// (c) (C) ? Â©
+// (tm) (TM) ? â„¢
+// (r) (R) ? Â®
+// +- ? Â±
+// (p) (P) -> Â§
+// ... ? â€¦ (also ?.... ? ?.., !.... ? !..)
 // ???????? ? ???, !!!!! ? !!!, `,,` ? `,`
 // -- ? &ndash;, --- ? &mdash;
 
@@ -95,4 +95,5 @@ let Md = new Remarkable(Config)
 
 # Differences to the original library
 
-The WebSharper extension is not too different to the original library. The only noticeable change is that the configuration options are represented with the Options type, and its fields can be set as needed.
+The WebSharper extension is not too different to the original library. 
+The only noticeable change is that the configuration options are represented with the Options type, and its fields can be set as needed.
