@@ -2,36 +2,36 @@
 open IntelliFactory.Build
 
 let bt =
-    BuildTool().PackageId("Zafir.Remarkable")
-        .VersionFrom("Zafir")
+    BuildTool().PackageId("WebSharper.Remarkable")
+        .VersionFrom("WebSharper")
         .WithFSharpVersion(FSharpVersion.FSharp30)
         .WithFramework(fun f -> f.Net40)
 
 let main =
-    bt.Zafir.Extension("WebSharper.Remarkable")
+    bt.WebSharper4.Extension("WebSharper.Remarkable")
         .SourcesFromProject()
         .Embed([])
         .References(fun r -> [])
 
 let tests =
-    bt.Zafir.SiteletWebsite("WebSharper.Remarkable.Tests")
+    bt.WebSharper4.SiteletWebsite("WebSharper.Remarkable.Tests")
         .SourcesFromProject()
         .Embed([])
         .References(fun r ->
             [
                 r.Project(main)
-                r.NuGet("Zafir.Testing").Latest(true).Reference()
-                r.NuGet("Zafir.UI.Next").Latest(true).Reference()
+                r.NuGet("WebSharper.Testing").Latest(true).Reference()
+                r.NuGet("WebSharper.UI.Next").Latest(true).Reference()
             ])
 
 let renderingtests =
-    bt.Zafir.BundleWebsite("WebSharper.Remarkable.RenderingTest")
+    bt.WebSharper4.BundleWebsite("WebSharper.Remarkable.RenderingTest")
         .SourcesFromProject()
         .Embed([])
         .References(fun r ->
             [
                 r.Project(main)
-                r.NuGet("Zafir.UI.Next").Latest(true).Reference()
+                r.NuGet("WebSharper.UI.Next").Latest(true).Reference()
             ])
 
 bt.Solution [
