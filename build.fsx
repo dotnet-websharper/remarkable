@@ -31,7 +31,7 @@ bt.Solution [
     bt.NuGet.CreatePackage()
         .Configure(fun c ->
             { c with
-                Title = Some "WebSharper.Remarkable"
+                Title = Some "WebSharper bindings for Remarkable"
                 LicenseUrl = Some "http://websharper.com/licensing"
                 ProjectUrl = Some "https://github.com/intellifactory/https://github.com/intellifactory/websharper.remarkable"
                 Description = "WebSharper Extension for remarkable 1.7.1"
