@@ -1,10 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Remarkable", "WebSharper.Remarkable\WebSharper.Remarkable.fsproj", "{93167253-1F52-46B0-911E-3DC03ACC1CBF}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Remarkable.Tests", "WebSharper.Remarkable.Tests\WebSharper.Remarkable.Tests.fsproj", "{756D6B15-82FC-4B69-8721-D5B2170B0465}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "WebSharper.Remarkable", "WebSharper.Remarkable\WebSharper.Remarkable.fsproj", "{93167253-1F52-46B0-911E-3DC03ACC1CBF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81D4E1D1-E78E-4DCB-9365-9A96241C8E06}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Remarkable.Sample", "WebSharper.Remarkable.Sample\WebSharper.Remarkable.Sample.fsproj", "{1D865EFE-5B48-48FE-B5D7-59C07C5A01C5}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "WebSharper.Remarkable.RenderingTest", "WebSharper.Remarkable.RenderingTest\WebSharper.Remarkable.RenderingTest.fsproj", "{10A18D24-C8F9-40C7-9B29-1BCAC19EA5FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,16 +30,15 @@ Global
 		{93167253-1F52-46B0-911E-3DC03ACC1CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93167253-1F52-46B0-911E-3DC03ACC1CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93167253-1F52-46B0-911E-3DC03ACC1CBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{756D6B15-82FC-4B69-8721-D5B2170B0465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{756D6B15-82FC-4B69-8721-D5B2170B0465}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{756D6B15-82FC-4B69-8721-D5B2170B0465}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{756D6B15-82FC-4B69-8721-D5B2170B0465}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D865EFE-5B48-48FE-B5D7-59C07C5A01C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D865EFE-5B48-48FE-B5D7-59C07C5A01C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D865EFE-5B48-48FE-B5D7-59C07C5A01C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D865EFE-5B48-48FE-B5D7-59C07C5A01C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A18D24-C8F9-40C7-9B29-1BCAC19EA5FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A18D24-C8F9-40C7-9B29-1BCAC19EA5FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A18D24-C8F9-40C7-9B29-1BCAC19EA5FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A18D24-C8F9-40C7-9B29-1BCAC19EA5FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51C26200-3063-4D72-9B3A-690D4E0DAB57}
 	EndGlobalSection
 EndGlobal

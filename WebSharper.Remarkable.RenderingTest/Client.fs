@@ -7,12 +7,10 @@ open WebSharper.Remarkable
 
 [<JavaScript>]
 module Client =
-    open WebSharper.UI.Next.Client
-    open WebSharper.UI.Next.Templating
-    open WebSharper.UI.Next
-
-    
-
+    open WebSharper.UI.Client
+    open WebSharper.UI.Templating
+    open WebSharper.UI
+    open WebSharper.UI.Html
 
     [<SPAEntryPoint>]
     let Main () =
@@ -27,11 +25,16 @@ module Client =
         remarkableConfig.Quotes <- "'“”‘’'"
 
         let md = new Remarkable.Remarkable(remarkableConfig)
-        let t =
-            WebSharper.UI.Next.Html.div[
-                WebSharper.UI.Next.Doc.TextNode "# Test text"
-            ]
-        t |> WebSharper.UI.Next.Client.Doc.RunById "main"
+        let rvInput = Var.Create ""
+        div [] [
+            h1 [] [text "WebSharper.Remarkable extension sample page"]
+            p [] [text "Type markdown text here:"]
+            Doc.InputArea [attr.``class`` "input"; attr.rows "20"] rvInput
+            hr [] []
+            h4 [] [text "Result"]
+            div [attr.``class`` "output"] [rvInput.View.Doc(md.Render >> Doc.Verbatim)]
+        ]
+        |> Doc.RunById "main"
         
 
         
