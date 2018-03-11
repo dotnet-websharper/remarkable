@@ -348,7 +348,7 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Remarkable,RenderingTest,Client,UI,Var,Operators,Obj,HtmlModule,attr,Doc,ConcreteVar,Snap,AttrProxy,JavaScript,Pervasives,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,View,Unchecked,EventTarget,Arrays,Docs,Array,Node,Elt,Enumerator,T,DocElemNode,CharacterData,JSModule,SC$1,Mailbox,SC$2,List,T$1,Object,Updates,Client$1,Attrs$1,Dyn,SC$3,Docs$1,RunState,NodeSet,An,SC$4,Collections,Dictionary,HashSet,Concurrency,Anims,AppendList,DictionaryUtil,AsyncBody,SC$5,CT,SC$6,HashSet$1,DynamicAttrNode,Slice,Strings,Scheduler,CancellationTokenSource,Easing,Queue,OperationCanceledException,HashSetUtil,SC$7,Lazy,DomNodes,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
+ var Global,WebSharper,Remarkable,RenderingTest,Client,UI,Var,Operators,Obj,HtmlModule,attr,Doc,ConcreteVar,Snap,AttrProxy,JavaScript,Pervasives,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,View,Unchecked,EventTarget,Arrays,Docs,Array,Node,Elt,Enumerator,T,DocElemNode,CharacterData,JSModule,SC$1,Mailbox,SC$2,List,T$1,Object,Updates,Client$1,Attrs$1,Dyn,SC$3,Docs$1,RunState,NodeSet,An,SC$4,Collections,Dictionary,HashSet,Concurrency,Anims,AppendList,Settings,DictionaryUtil,AsyncBody,SC$5,CT,SC$6,HashSet$1,DynamicAttrNode,Slice,Strings,Scheduler,CancellationTokenSource,Easing,Queue,OperationCanceledException,HashSetUtil,SC$7,Lazy,DomNodes,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
  Global=window;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Remarkable=WebSharper.Remarkable=WebSharper.Remarkable||{};
@@ -407,6 +407,7 @@ if (!console) {
  Concurrency=WebSharper.Concurrency=WebSharper.Concurrency||{};
  Anims=UI.Anims=UI.Anims||{};
  AppendList=UI.AppendList=UI.AppendList||{};
+ Settings=Client$1.Settings=Client$1.Settings||{};
  DictionaryUtil=Collections.DictionaryUtil=Collections.DictionaryUtil||{};
  AsyncBody=Concurrency.AsyncBody=Concurrency.AsyncBody||{};
  SC$5=Global.StartupCode$WebSharper_Main$Concurrency=Global.StartupCode$WebSharper_Main$Concurrency||{};
@@ -2046,10 +2047,10 @@ if (!console) {
     ok();
    });
   }
-  return Concurrency.FromContinuations(function($1,$2,$3)
+  return Settings.BatchUpdatesEnabled()?Concurrency.FromContinuations(function($1,$2,$3)
   {
    return a.apply(null,[$1,$2,$3]);
-  });
+  }):(Docs.SyncElemNode(st.Top),Concurrency.Return(null));
  };
  Docs.InsertNode=function(parent,node,pos)
  {
@@ -2793,6 +2794,7 @@ if (!console) {
  SC$4.$cctor=function()
  {
   SC$4.$cctor=Global.ignore;
+  SC$4.BatchUpdatesEnabled=true;
   SC$4.LoadedTemplates=new Dictionary.New$5();
   SC$4.LocalTemplatesLoaded=false;
   SC$4.TextHoleRE="\\${([^}]+)}";
@@ -3301,6 +3303,11 @@ if (!console) {
  {
   SC$7.$cctor();
   return SC$7.Empty;
+ };
+ Settings.BatchUpdatesEnabled=function()
+ {
+  SC$4.$cctor();
+  return SC$4.BatchUpdatesEnabled;
  };
  DictionaryUtil.notPresent=function()
  {
