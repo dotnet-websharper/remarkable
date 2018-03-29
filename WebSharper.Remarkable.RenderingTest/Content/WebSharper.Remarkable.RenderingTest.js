@@ -348,7 +348,7 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Remarkable,RenderingTest,Client,UI,Var,Operators,Obj,HtmlModule,attr,Doc,ConcreteVar,Snap,AttrProxy,JavaScript,Pervasives,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,View,Unchecked,EventTarget,Arrays,Docs,Array,Node,Elt,Enumerator,T,DocElemNode,CharacterData,JSModule,SC$1,SC$2,List,T$1,Object,Updates,Client$1,Attrs$1,Dyn,SC$3,Mailbox,SC$4,Collections,Dictionary,Docs$1,RunState,NodeSet,An,HashSet,Concurrency,Anims,AppendList,Settings,DynamicAttrNode,DictionaryUtil,Slice,Strings,AsyncBody,SC$5,CT,SC$6,HashSet$1,Queue,Scheduler,CancellationTokenSource,Easing,OperationCanceledException,HashSetUtil,SC$7,Lazy,DomNodes,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
+ var Global,WebSharper,Remarkable,RenderingTest,Client,UI,Var,Operators,Obj,HtmlModule,attr,Doc,ConcreteVar,Snap,AttrProxy,JavaScript,Pervasives,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,View,Unchecked,EventTarget,Arrays,Docs,Array,Node,Elt,Enumerator,T,DocElemNode,CharacterData,JSModule,SC$1,SC$2,List,T$1,Object,Updates,Client$1,Attrs$1,Dyn,SC$3,An,Settings,Mailbox,SC$4,Collections,Dictionary,Docs$1,RunState,NodeSet,Anims,HashSet,SC$5,Concurrency,AppendList,DynamicAttrNode,DictionaryUtil,Slice,Strings,Easing,AsyncBody,SC$6,CT,HashSet$1,Queue,Scheduler,CancellationTokenSource,DomNodes,OperationCanceledException,HashSetUtil,SC$7,Lazy,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
  Global=window;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Remarkable=WebSharper.Remarkable=WebSharper.Remarkable||{};
@@ -395,6 +395,8 @@ if (!console) {
  Attrs$1=Client$1.Attrs=Client$1.Attrs||{};
  Dyn=Attrs$1.Dyn=Attrs$1.Dyn||{};
  SC$3=Global.StartupCode$WebSharper_UI$Attr_Client=Global.StartupCode$WebSharper_UI$Attr_Client||{};
+ An=UI.An=UI.An||{};
+ Settings=Client$1.Settings=Client$1.Settings||{};
  Mailbox=Abbrev.Mailbox=Abbrev.Mailbox||{};
  SC$4=Global.StartupCode$WebSharper_UI$Doc_Client=Global.StartupCode$WebSharper_UI$Doc_Client||{};
  Collections=WebSharper.Collections=WebSharper.Collections||{};
@@ -402,30 +404,28 @@ if (!console) {
  Docs$1=Client$1.Docs=Client$1.Docs||{};
  RunState=Docs$1.RunState=Docs$1.RunState||{};
  NodeSet=Docs$1.NodeSet=Docs$1.NodeSet||{};
- An=UI.An=UI.An||{};
- HashSet=Collections.HashSet=Collections.HashSet||{};
- Concurrency=WebSharper.Concurrency=WebSharper.Concurrency||{};
  Anims=UI.Anims=UI.Anims||{};
+ HashSet=Collections.HashSet=Collections.HashSet||{};
+ SC$5=Global.StartupCode$WebSharper_UI$Animation=Global.StartupCode$WebSharper_UI$Animation||{};
+ Concurrency=WebSharper.Concurrency=WebSharper.Concurrency||{};
  AppendList=UI.AppendList=UI.AppendList||{};
- Settings=Client$1.Settings=Client$1.Settings||{};
  DynamicAttrNode=UI.DynamicAttrNode=UI.DynamicAttrNode||{};
  DictionaryUtil=Collections.DictionaryUtil=Collections.DictionaryUtil||{};
  Slice=WebSharper.Slice=WebSharper.Slice||{};
  Strings=WebSharper.Strings=WebSharper.Strings||{};
+ Easing=UI.Easing=UI.Easing||{};
  AsyncBody=Concurrency.AsyncBody=Concurrency.AsyncBody||{};
- SC$5=Global.StartupCode$WebSharper_Main$Concurrency=Global.StartupCode$WebSharper_Main$Concurrency||{};
+ SC$6=Global.StartupCode$WebSharper_Main$Concurrency=Global.StartupCode$WebSharper_Main$Concurrency||{};
  CT=Concurrency.CT=Concurrency.CT||{};
- SC$6=Global.StartupCode$WebSharper_UI$Animation=Global.StartupCode$WebSharper_UI$Animation||{};
  HashSet$1=Abbrev.HashSet=Abbrev.HashSet||{};
  Queue=WebSharper.Queue=WebSharper.Queue||{};
  Scheduler=Concurrency.Scheduler=Concurrency.Scheduler||{};
  CancellationTokenSource=WebSharper.CancellationTokenSource=WebSharper.CancellationTokenSource||{};
- Easing=UI.Easing=UI.Easing||{};
+ DomNodes=Docs$1.DomNodes=Docs$1.DomNodes||{};
  OperationCanceledException=WebSharper.OperationCanceledException=WebSharper.OperationCanceledException||{};
  HashSetUtil=Collections.HashSetUtil=Collections.HashSetUtil||{};
  SC$7=Global.StartupCode$WebSharper_UI$AppendList=Global.StartupCode$WebSharper_UI$AppendList||{};
  Lazy=WebSharper.Lazy=WebSharper.Lazy||{};
- DomNodes=Docs$1.DomNodes=Docs$1.DomNodes||{};
  LazyExtensionsProxy=WebSharper.LazyExtensionsProxy=WebSharper.LazyExtensionsProxy||{};
  LazyRecord=LazyExtensionsProxy.LazyRecord=LazyExtensionsProxy.LazyRecord||{};
  IntelliFactory=Global.IntelliFactory;
@@ -560,7 +560,7 @@ if (!console) {
  {
   Doc.LoadLocalTemplates$1();
   Docs.LinkElement(parent,doc.docNode);
-  Doc.RunInPlace(parent,doc);
+  Doc.RunInPlace(false,parent,doc);
  };
  Doc.Empty=function()
  {
@@ -595,11 +595,14 @@ if (!console) {
     Doc.LoadLocalTemplates("");
    }
  };
- Doc.RunInPlace=function(parent,doc)
+ Doc.RunInPlace=function(childrenOnly,parent,doc)
  {
-  var d;
-  d=doc.docNode;
-  View.Sink(Mailbox.StartProcessor(Docs.PerformAnimatedUpdate(Docs.CreateRunState(parent,d),d)),doc.updates);
+  var st;
+  st=Docs.CreateRunState(parent,doc.docNode);
+  View.Sink(An.get_UseAnimations()||Settings.BatchUpdatesEnabled()?Mailbox.StartProcessor(Docs.PerformAnimatedUpdate(childrenOnly,st,doc.docNode)):function()
+  {
+   Docs.PerformSyncUpdate(childrenOnly,st,doc.docNode);
+  },doc.updates);
  };
  Doc.LoadLocalTemplates=function(baseName)
  {
@@ -1983,7 +1986,7 @@ if (!console) {
  {
   return RunState.New(NodeSet.get_Empty(),Docs.CreateElemNode(parent,Attrs.EmptyAttr(),doc));
  };
- Docs.PerformAnimatedUpdate=function(st,doc)
+ Docs.PerformAnimatedUpdate=function(childrenOnly,st,doc)
  {
   var b;
   return An.get_UseAnimations()?(b=null,Concurrency.Delay(function()
@@ -1994,7 +1997,7 @@ if (!console) {
    enter=Docs.ComputeEnterAnim(st,cur);
    return Concurrency.Bind(An.Play(An.Append(change,Docs.ComputeExitAnim(st,cur))),function()
    {
-    return Concurrency.Bind(Docs.SyncElemNodesNextFrame(st),function()
+    return Concurrency.Bind(Docs.SyncElemNodesNextFrame(childrenOnly,st),function()
     {
      return Concurrency.Bind(An.Play(enter),function()
      {
@@ -2003,7 +2006,14 @@ if (!console) {
      });
     });
    });
-  })):Docs.SyncElemNodesNextFrame(st);
+  })):Docs.SyncElemNodesNextFrame(childrenOnly,st);
+ };
+ Docs.PerformSyncUpdate=function(childrenOnly,st,doc)
+ {
+  var cur;
+  cur=NodeSet.FindAll(doc);
+  Docs.SyncElemNode(childrenOnly,st.Top);
+  st.PreviousNodes=cur;
  };
  Docs.InsertNode=function(parent,node,pos)
  {
@@ -2066,31 +2076,26 @@ if (!console) {
    return Attrs.HasExitAnim(n.Attr);
   },st.PreviousNodes)))));
  };
- Docs.SyncElemNodesNextFrame=function(st)
+ Docs.SyncElemNodesNextFrame=function(childrenOnly,st)
  {
   function a(ok)
   {
    Global.requestAnimationFrame(function()
    {
-    Docs.SyncElemNode(st.Top);
+    Docs.SyncElemNode(childrenOnly,st.Top);
     ok();
    });
   }
   return Settings.BatchUpdatesEnabled()?Concurrency.FromContinuations(function($1,$2,$3)
   {
    return a.apply(null,[$1,$2,$3]);
-  }):(Docs.SyncElemNode(st.Top),Concurrency.Return(null));
+  }):(Docs.SyncElemNode(childrenOnly,st.Top),Concurrency.Return(null));
  };
- Docs.SyncElemNode=function(el)
+ Docs.SyncElemNode=function(childrenOnly,el)
  {
-  Docs.SyncElement(el);
+  !childrenOnly?Docs.SyncElement(el):void 0;
   Docs.Sync(el.Children);
   Docs.AfterRender(el);
- };
- Docs.TextHoleRE=function()
- {
-  SC$4.$cctor();
-  return SC$4.TextHoleRE;
  };
  Docs.SyncElement=function(el)
  {
@@ -2110,7 +2115,7 @@ if (!console) {
  {
   var d,t;
   if(doc!=null&&doc.$==1)
-   Docs.SyncElemNode(doc.$0);
+   Docs.SyncElemNode(false,doc.$0);
   else
    if(doc!=null&&doc.$==2)
     Docs.Sync(doc.$0.Current);
@@ -2132,7 +2137,7 @@ if (!console) {
          t=doc.$0;
          Arrays.iter(function(e)
          {
-          Docs.SyncElemNode(e);
+          Docs.SyncElemNode(false,e);
          },t.Holes);
          Arrays.iter(function(t$1)
          {
@@ -2151,6 +2156,11 @@ if (!console) {
   var m;
   m=Runtime.GetOptional(el.Render);
   m!=null&&m.$==1?(m.$0(el.El),Runtime.SetOptional(el,"Render",null)):void 0;
+ };
+ Docs.TextHoleRE=function()
+ {
+  SC$4.$cctor();
+  return SC$4.TextHoleRE;
  };
  Docs.DoSyncElement=function(el)
  {
@@ -2622,6 +2632,76 @@ if (!console) {
   SC$3.$cctor=Global.ignore;
   SC$3.EmptyAttr=null;
  };
+ An.get_UseAnimations=function()
+ {
+  return Anims.UseAnimations();
+ };
+ An.Play=function(anim)
+ {
+  var b;
+  b=null;
+  return Concurrency.Delay(function()
+  {
+   return Concurrency.Bind(An.Run(Global.ignore,Anims.Actions(anim)),function()
+   {
+    Anims.Finalize(anim);
+    return Concurrency.Return(null);
+   });
+  });
+ };
+ An.Append=function(a,a$1)
+ {
+  return{
+   $:0,
+   $0:AppendList.Append(a.$0,a$1.$0)
+  };
+ };
+ An.Concat=function(xs)
+ {
+  return{
+   $:0,
+   $0:AppendList.Concat(Seq.map(Anims.List,xs))
+  };
+ };
+ An.Run=function(k,anim)
+ {
+  var dur;
+  function a(ok)
+  {
+   function loop(start,now)
+   {
+    var t;
+    t=now-start;
+    anim.Compute(t);
+    k();
+    return t<=dur?void Global.requestAnimationFrame(function(t$1)
+    {
+     loop(start,t$1);
+    }):ok();
+   }
+   Global.requestAnimationFrame(function(t)
+   {
+    loop(t,t);
+   });
+  }
+  dur=anim.Duration;
+  return dur===0?Concurrency.Zero():Concurrency.FromContinuations(function($1,$2,$3)
+  {
+   return a.apply(null,[$1,$2,$3]);
+  });
+ };
+ An.get_Empty=function()
+ {
+  return{
+   $:0,
+   $0:AppendList.Empty()
+  };
+ };
+ Settings.BatchUpdatesEnabled=function()
+ {
+  SC$4.$cctor();
+  return SC$4.BatchUpdatesEnabled;
+ };
  Mailbox.StartProcessor=function(procAsync)
  {
   var st;
@@ -2842,69 +2922,81 @@ if (!console) {
    $0:HashSet$1.Except(a.$0,a$1.$0)
   };
  };
- An.get_UseAnimations=function()
+ Anims.UseAnimations=function()
  {
-  return Anims.UseAnimations();
+  SC$5.$cctor();
+  return SC$5.UseAnimations;
  };
- An.Play=function(anim)
+ Anims.Actions=function(a)
  {
-  var b;
-  b=null;
-  return Concurrency.Delay(function()
+  return Anims.ConcatActions(Arrays.choose(function(a$1)
   {
-   return Concurrency.Bind(An.Run(Global.ignore,Anims.Actions(anim)),function()
-   {
-    Anims.Finalize(anim);
-    return Concurrency.Return(null);
-   });
-  });
+   return a$1.$==1?{
+    $:1,
+    $0:a$1.$0
+   }:null;
+  },AppendList.ToArray(a.$0)));
  };
- An.Append=function(a,a$1)
+ Anims.Finalize=function(a)
  {
-  return{
-   $:0,
-   $0:AppendList.Append(a.$0,a$1.$0)
-  };
- };
- An.Concat=function(xs)
- {
-  return{
-   $:0,
-   $0:AppendList.Concat(Seq.map(Anims.List,xs))
-  };
- };
- An.Run=function(k,anim)
- {
-  var dur;
-  function a(ok)
+  Arrays.iter(function(a$1)
   {
-   function loop(start,now)
+   if(a$1.$==0)
+    a$1.$0();
+  },AppendList.ToArray(a.$0));
+ };
+ Anims.List=function(a)
+ {
+  return a.$0;
+ };
+ Anims.ConcatActions=function(xs)
+ {
+  var xs$1,m,dur,xs$2;
+  xs$1=Array.ofSeqNonCopying(xs);
+  m=Arrays.length(xs$1);
+  return m===0?Anims.Const():m===1?Arrays.get(xs$1,0):(dur=Seq.max(Seq.map(function(anim)
+  {
+   return anim.Duration;
+  },xs$1)),(xs$2=Arrays.map(function(a)
+  {
+   return Anims.Prolong(dur,a);
+  },xs$1),Anims.Def(dur,function(t)
+  {
+   Arrays.iter(function(anim)
    {
-    var t;
-    t=now-start;
     anim.Compute(t);
-    k();
-    return t<=dur?void Global.requestAnimationFrame(function(t$1)
-    {
-     loop(start,t$1);
-    }):ok();
-   }
-   Global.requestAnimationFrame(function(t)
-   {
-    loop(t,t);
-   });
-  }
-  dur=anim.Duration;
-  return dur===0?Concurrency.Zero():Concurrency.FromContinuations(function($1,$2,$3)
+   },xs$2);
+  })));
+ };
+ Anims.Const=function(v)
+ {
+  return Anims.Def(0,function()
   {
-   return a.apply(null,[$1,$2,$3]);
+   return v;
   });
  };
- An.get_Empty=function()
+ Anims.Prolong=function(nextDuration,anim)
+ {
+  var comp,dur,last;
+  comp=anim.Compute;
+  dur=anim.Duration;
+  last=Lazy.Create(function()
+  {
+   return anim.Compute(anim.Duration);
+  });
+  return{
+   Compute:function(t)
+   {
+    return t>=dur?last.f():comp(t);
+   },
+   Duration:nextDuration
+  };
+ };
+ Anims.Def=function(d,f)
  {
   return{
-   $:0,
-   $0:AppendList.Empty()
+   Compute:f,
+   Duration:d
   };
  };
  HashSet=Collections.HashSet=Runtime.Class({
@@ -3032,6 +3124,17 @@ if (!console) {
     e.Dispose();
   }
  },HashSet);
+ SC$5.$cctor=function()
+ {
+  SC$5.$cctor=Global.ignore;
+  SC$5.CubicInOut=Easing.Custom(function(t)
+  {
+   var t2;
+   t2=t*t;
+   return 3*t2-2*(t2*t);
+  });
+  SC$5.UseAnimations=true;
+ };
  Concurrency.Delay=function(mk)
  {
   return function(c)
@@ -3084,8 +3187,8 @@ if (!console) {
  };
  Concurrency.Zero=function()
  {
-  SC$5.$cctor();
-  return SC$5.Zero;
+  SC$6.$cctor();
+  return SC$6.Zero;
  };
  Concurrency.Start=function(c,ctOpt)
  {
@@ -3123,8 +3226,8 @@ if (!console) {
  };
  Concurrency.defCTS=function()
  {
-  SC$5.$cctor();
-  return SC$5.defCTS;
+  SC$6.$cctor();
+  return SC$6.defCTS;
  };
  Concurrency.UncaughtAsyncError=function(e)
  {
@@ -3185,85 +3288,8 @@ if (!console) {
  };
  Concurrency.scheduler=function()
  {
-  SC$5.$cctor();
-  return SC$5.scheduler;
- };
- Anims.UseAnimations=function()
- {
   SC$6.$cctor();
-  return SC$6.UseAnimations;
- };
- Anims.Actions=function(a)
- {
-  return Anims.ConcatActions(Arrays.choose(function(a$1)
-  {
-   return a$1.$==1?{
-    $:1,
-    $0:a$1.$0
-   }:null;
-  },AppendList.ToArray(a.$0)));
- };
- Anims.Finalize=function(a)
- {
-  Arrays.iter(function(a$1)
-  {
-   if(a$1.$==0)
-    a$1.$0();
-  },AppendList.ToArray(a.$0));
- };
- Anims.List=function(a)
- {
-  return a.$0;
- };
- Anims.ConcatActions=function(xs)
- {
-  var xs$1,m,dur,xs$2;
-  xs$1=Array.ofSeqNonCopying(xs);
-  m=Arrays.length(xs$1);
-  return m===0?Anims.Const():m===1?Arrays.get(xs$1,0):(dur=Seq.max(Seq.map(function(anim)
-  {
-   return anim.Duration;
-  },xs$1)),(xs$2=Arrays.map(function(a)
-  {
-   return Anims.Prolong(dur,a);
-  },xs$1),Anims.Def(dur,function(t)
-  {
-   Arrays.iter(function(anim)
-   {
-    anim.Compute(t);
-   },xs$2);
-  })));
- };
- Anims.Const=function(v)
- {
-  return Anims.Def(0,function()
-  {
-   return v;
-  });
- };
- Anims.Prolong=function(nextDuration,anim)
- {
-  var comp,dur,last;
-  comp=anim.Compute;
-  dur=anim.Duration;
-  last=Lazy.Create(function()
-  {
-   return anim.Compute(anim.Duration);
-  });
-  return{
-   Compute:function(t)
-   {
-    return t>=dur?last.f():comp(t);
-   },
-   Duration:nextDuration
-  };
- };
- Anims.Def=function(d,f)
- {
-  return{
-   Compute:f,
-   Duration:d
-  };
+  return SC$6.scheduler;
  };
  AppendList.Append=function(x,y)
  {
@@ -3307,11 +3333,6 @@ if (!console) {
  {
   SC$7.$cctor();
   return SC$7.Empty;
- };
- Settings.BatchUpdatesEnabled=function()
- {
-  SC$4.$cctor();
-  return SC$4.BatchUpdatesEnabled;
  };
  DynamicAttrNode=UI.DynamicAttrNode=Runtime.Class({
   NChanged:function()
@@ -3387,6 +3408,15 @@ if (!console) {
  {
   return str.split(pat);
  };
+ Easing=UI.Easing=Runtime.Class({},Obj,Easing);
+ Easing.Custom=function(f)
+ {
+  return new Easing.New(f);
+ };
+ Easing.New=Runtime.Ctor(function(transformTime)
+ {
+  this.transformTime=transformTime;
+ },Easing);
  AsyncBody.New=function(k,ct)
  {
   return{
@@ -3394,14 +3424,14 @@ if (!console) {
    ct:ct
   };
  };
- SC$5.$cctor=function()
+ SC$6.$cctor=function()
  {
-  SC$5.$cctor=Global.ignore;
-  SC$5.noneCT=CT.New(false,[]);
-  SC$5.scheduler=new Scheduler.New();
-  SC$5.defCTS=[new CancellationTokenSource.New()];
-  SC$5.Zero=Concurrency.Return();
-  SC$5.GetCT=function(c)
+  SC$6.$cctor=Global.ignore;
+  SC$6.noneCT=CT.New(false,[]);
+  SC$6.scheduler=new Scheduler.New();
+  SC$6.defCTS=[new CancellationTokenSource.New()];
+  SC$6.Zero=Concurrency.Return();
+  SC$6.GetCT=function(c)
   {
    c.k({
     $:0,
@@ -3415,17 +3445,6 @@ if (!console) {
    c:IsCancellationRequested,
    r:Registrations
   };
- };
- SC$6.$cctor=function()
- {
-  SC$6.$cctor=Global.ignore;
-  SC$6.CubicInOut=Easing.Custom(function(t)
-  {
-   var t2;
-   t2=t*t;
-   return 3*t2-2*(t2*t);
-  });
-  SC$6.UseAnimations=true;
  };
  HashSet$1.Filter=function(ok,set)
  {
@@ -3502,57 +3521,6 @@ if (!console) {
   this.r=[];
   this.init=1;
  },CancellationTokenSource);
- Easing=UI.Easing=Runtime.Class({},Obj,Easing);
- Easing.Custom=function(f)
- {
-  return new Easing.New(f);
- };
- Easing.New=Runtime.Ctor(function(transformTime)
- {
-  this.transformTime=transformTime;
- },Easing);
- OperationCanceledException=WebSharper.OperationCanceledException=Runtime.Class({},null,OperationCanceledException);
- OperationCanceledException.New=Runtime.Ctor(function(ct)
- {
-  OperationCanceledException.New$1.call(this,"The operation was canceled.",null,ct);
- },OperationCanceledException);
- OperationCanceledException.New$1=Runtime.Ctor(function(message,inner,ct)
- {
-  this.message=message;
-  this.inner=inner;
-  this.ct=ct;
- },OperationCanceledException);
- HashSetUtil.concat=function(o)
- {
-  var r,k;
-  r=[];
-  for(var k$1 in o)r.push.apply(r,o[k$1]);
-  return r;
- };
- SC$7.$cctor=function()
- {
-  SC$7.$cctor=Global.ignore;
-  SC$7.Empty={
-   $:0
-  };
- };
- Lazy.Create=function(f)
- {
-  return LazyRecord.New(false,f,Lazy.forceLazy);
- };
- Lazy.forceLazy=function()
- {
-  var v;
-  v=this.v();
-  this.c=true;
-  this.v=v;
-  this.f=Lazy.cachedLazy;
-  return v;
- };
- Lazy.cachedLazy=function()
- {
-  return this.v;
- };
  DomNodes.DocChildren=function(node)
  {
   var q;
@@ -3638,6 +3606,48 @@ if (!console) {
  DomNodes.Iter=function(f,a)
  {
   Arrays.iter(f,a.$0);
+ };
+ OperationCanceledException=WebSharper.OperationCanceledException=Runtime.Class({},null,OperationCanceledException);
+ OperationCanceledException.New=Runtime.Ctor(function(ct)
+ {
+  OperationCanceledException.New$1.call(this,"The operation was canceled.",null,ct);
+ },OperationCanceledException);
+ OperationCanceledException.New$1=Runtime.Ctor(function(message,inner,ct)
+ {
+  this.message=message;
+  this.inner=inner;
+  this.ct=ct;
+ },OperationCanceledException);
+ HashSetUtil.concat=function(o)
+ {
+  var r,k;
+  r=[];
+  for(var k$1 in o)r.push.apply(r,o[k$1]);
+  return r;
+ };
+ SC$7.$cctor=function()
+ {
+  SC$7.$cctor=Global.ignore;
+  SC$7.Empty={
+   $:0
+  };
+ };
+ Lazy.Create=function(f)
+ {
+  return LazyRecord.New(false,f,Lazy.forceLazy);
+ };
+ Lazy.forceLazy=function()
+ {
+  var v;
+  v=this.v();
+  this.c=true;
+  this.v=v;
+  this.f=Lazy.cachedLazy;
+  return v;
+ };
+ Lazy.cachedLazy=function()
+ {
+  return this.v;
  };
  LazyRecord.New=function(created,evalOrVal,force)
  {
