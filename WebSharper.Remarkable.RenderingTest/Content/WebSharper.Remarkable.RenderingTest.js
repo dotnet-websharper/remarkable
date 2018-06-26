@@ -852,7 +852,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
   return r;
@@ -1107,7 +1107,7 @@ if (!console) {
   var d;
   return doc!=null&&doc.$==1?Docs.InsertNode(parent,doc.$0.El,pos):doc!=null&&doc.$==2?(d=doc.$0,(d.Dirty=false,Docs.InsertDoc(parent,d.Current,pos))):doc==null?pos:doc!=null&&doc.$==4?Docs.InsertNode(parent,doc.$0.Text,pos):doc!=null&&doc.$==5?Docs.InsertNode(parent,doc.$0,pos):doc!=null&&doc.$==6?Arrays.foldBack(function($1,$2)
   {
-   return $1.constructor===Object?Docs.InsertDoc(parent,$1,$2):Docs.InsertNode(parent,$1,$2);
+   return $1==null||$1.constructor===Object?Docs.InsertDoc(parent,$1,$2):Docs.InsertNode(parent,$1,$2);
   },doc.$0.Els,pos):Docs.InsertDoc(parent,doc.$0,Docs.InsertDoc(parent,doc.$1,pos));
  };
  Docs.CreateEmbedNode=function()
@@ -1285,7 +1285,7 @@ if (!console) {
    var d,t;
    return doc!=null&&doc.$==1?doc.$0.El:doc!=null&&doc.$==2?(d=doc.$0,d.Dirty?(d.Dirty=false,Docs.InsertDoc(parent,d.Current,pos)):ins(d.Current,pos)):doc==null?pos:doc!=null&&doc.$==4?doc.$0.Text:doc!=null&&doc.$==5?doc.$0:doc!=null&&doc.$==6?(t=doc.$0,(t.Dirty?t.Dirty=false:void 0,Arrays.foldBack(function($1,$2)
    {
-    return $1.constructor===Object?ins($1,$2):$1;
+    return $1==null||$1.constructor===Object?ins($1,$2):$1;
    },t.Els,pos))):ins(doc.$0,ins(doc.$1,pos));
   }
   parent=el.El;
@@ -1329,7 +1329,7 @@ if (!console) {
       }
       finally
       {
-       if("Dispose"in o)
+       if(typeof o=="object"&&"Dispose"in o)
         o.Dispose();
       }
      }
@@ -1817,7 +1817,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  };
@@ -1831,7 +1831,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  };
@@ -1848,7 +1848,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  };
@@ -1887,7 +1887,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  };
@@ -2146,7 +2146,7 @@ if (!console) {
    var $this,d;
    $this=this;
    d=this.data[this.hash(k)];
-   return d&&Arrays.exists(function(a)
+   return d==null?false:Arrays.exists(function(a)
    {
     return $this.equals.apply(null,[(Operators.KeyValue(a))[0],k]);
    },d);
@@ -2156,7 +2156,7 @@ if (!console) {
    var $this,d,v;
    $this=this;
    d=this.data[this.hash(k)];
-   return d&&(v=Arrays.tryPick(function(a)
+   return d==null?false:(v=Arrays.tryPick(function(a)
    {
     var a$1;
     a$1=Operators.KeyValue(a);
@@ -2180,7 +2180,10 @@ if (!console) {
    $this=this;
    h=this.hash(k);
    d=this.data[h];
-   d?(m=Arrays.tryFindIndex(function(a)
+   d==null?(this.count=this.count+1,this.data[h]=new Global.Array({
+    K:k,
+    V:v
+   })):(m=Arrays.tryFindIndex(function(a)
    {
     return $this.equals.apply(null,[(Operators.KeyValue(a))[0],k]);
    },d),m==null?(this.count=this.count+1,d.push({
@@ -2189,10 +2192,7 @@ if (!console) {
    })):d[m.$0]={
     K:k,
     V:v
-   }):(this.count=this.count+1,this.data[h]=new Global.Array({
-    K:k,
-    V:v
-   }));
+   });
   },
   remove:function(k)
   {
@@ -2200,7 +2200,7 @@ if (!console) {
    $this=this;
    h=this.hash(k);
    d=this.data[h];
-   return d&&(r=Arrays.filter(function(a)
+   return d==null?false:(r=Arrays.filter(function(a)
    {
     return!$this.equals.apply(null,[(Operators.KeyValue(a))[0],k]);
    },d),Arrays.length(r)<d.length&&(this.count=this.count-1,this.data[h]=r,true));
@@ -2214,7 +2214,7 @@ if (!console) {
    var $this,d;
    $this=this;
    d=this.data[this.hash(k)];
-   return d?Arrays.pick(function(a)
+   return d==null?DictionaryUtil.notPresent():Arrays.pick(function(a)
    {
     var a$1;
     a$1=Operators.KeyValue(a);
@@ -2222,7 +2222,7 @@ if (!console) {
      $:1,
      $0:a$1[1]
     }:null;
-   },d):DictionaryUtil.notPresent();
+   },d);
   },
   GetEnumerator:function()
   {
@@ -2255,7 +2255,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  },Dictionary);
@@ -2436,7 +2436,7 @@ if (!console) {
    }
    finally
    {
-    if("Dispose"in e)
+    if(typeof e=="object"&&"Dispose"in e)
      e.Dispose();
    }
   },
@@ -2490,7 +2490,7 @@ if (!console) {
   }
   finally
   {
-   if("Dispose"in e)
+   if(typeof e=="object"&&"Dispose"in e)
     e.Dispose();
   }
  },HashSet);
@@ -2634,7 +2634,7 @@ if (!console) {
      }
      finally
      {
-      if("Dispose"in o)
+      if(typeof o=="object"&&"Dispose"in o)
        o.Dispose();
      }
     }
@@ -3622,7 +3622,7 @@ if (!console) {
         if(doc!=null&&doc.$==6)
          Arrays.iter(function(a)
          {
-          if(a.constructor===Object)
+          if(a==null||a.constructor===Object)
            loop(a);
           else
            q.push(a);
