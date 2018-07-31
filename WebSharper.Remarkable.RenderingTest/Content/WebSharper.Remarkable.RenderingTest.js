@@ -361,18 +361,19 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Remarkable,RenderingTest,Client,UI,Var,Operators,Obj,HtmlModule,attr,Doc,ConcreteVar,Snap,JavaScript,Pervasives,AttrProxy,View,Array,Unchecked,EventTarget,Arrays,Docs,Client$1,Templates,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,JS,DocElemNode,Node,Collections,Dictionary,Elt,Enumerator,T,CharacterData,Attrs$1,Dyn,SC$1,SC$2,HashSet,WindowOrWorkerGlobalScope,SC$3,SC$4,Updates,List,T$1,Object,DictionaryUtil,Prepare,Slice,KeyCollection,An,Settings,Mailbox,Strings,Docs$1,RunState,NodeSet,Anims,SC$5,SC$6,Concurrency,AppendList,HashSetUtil,DynamicAttrNode,Easing,AsyncBody,SC$7,CT,HashSet$1,Queue,Scheduler,CancellationTokenSource,DomNodes,Error,OperationCanceledException,Lazy,SC$8,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
+ var Global,WebSharper,Remarkable,RenderingTest,Client,Obj,UI,Var$1,Operators,HtmlModule,attr,Var,Doc,ConcreteVar,Snap,JavaScript,Pervasives,AttrProxy,View,Array,Unchecked,EventTarget,Arrays,Docs,Client$1,Templates,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,JS,DocElemNode,Node,Collections,Dictionary,Elt,Enumerator,T,CharacterData,Attrs$1,Dyn,SC$1,SC$2,HashSet,WindowOrWorkerGlobalScope,SC$3,SC$4,Updates,List,T$1,Object,DictionaryUtil,Prepare,Slice,KeyCollection,An,Settings,Mailbox,Strings,Docs$1,RunState,NodeSet,Anims,SC$5,SC$6,Concurrency,AppendList,HashSetUtil,DynamicAttrNode,Easing,AsyncBody,SC$7,CT,HashSet$1,Queue,Scheduler,CancellationTokenSource,DomNodes,Error,OperationCanceledException,Lazy,SC$8,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
  Global=self;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Remarkable=WebSharper.Remarkable=WebSharper.Remarkable||{};
  RenderingTest=Remarkable.RenderingTest=Remarkable.RenderingTest||{};
  Client=RenderingTest.Client=RenderingTest.Client||{};
- UI=WebSharper.UI=WebSharper.UI||{};
- Var=UI.Var=UI.Var||{};
- Operators=WebSharper.Operators=WebSharper.Operators||{};
  Obj=WebSharper.Obj=WebSharper.Obj||{};
+ UI=WebSharper.UI=WebSharper.UI||{};
+ Var$1=UI.Var$1=UI.Var$1||{};
+ Operators=WebSharper.Operators=WebSharper.Operators||{};
  HtmlModule=UI.HtmlModule=UI.HtmlModule||{};
  attr=HtmlModule.attr=HtmlModule.attr||{};
+ Var=UI.Var=UI.Var||{};
  Doc=UI.Doc=UI.Doc||{};
  ConcreteVar=UI.ConcreteVar=UI.ConcreteVar||{};
  Snap=UI.Snap=UI.Snap||{};
@@ -469,7 +470,7 @@ if (!console) {
    typographer:false,
    quotes:"'\ufffd\ufffd\ufffd\ufffd'"
   });
-  rvInput=Var.Create$1("");
+  rvInput=Var$1.Create$1("");
   a=Doc.Element("div",[],[Doc.Element("h1",[],[Doc.TextNode("WebSharper.Remarkable extension sample page")]),Doc.Element("p",[],[Doc.TextNode("Type markdown text here:")]),Doc.InputArea([AttrProxy.Create("class","input"),AttrProxy.Create("rows","20")],rvInput),Doc.Element("hr",[],[]),Doc.Element("h4",[],[Doc.TextNode("Result")]),Doc.Element("div",[AttrProxy.Create("class","output")],[Doc.BindView(function(x)
   {
    return Doc.Verbatim(f(x));
@@ -477,7 +478,21 @@ if (!console) {
   Templates.LoadLocalTemplates("");
   Doc.RunById("main",a);
  };
- Var.Create$1=function(v)
+ Obj=WebSharper.Obj=Runtime.Class({
+  Equals:function(obj)
+  {
+   return this===obj;
+  },
+  GetHashCode:function()
+  {
+   return -1;
+  }
+ },null,Obj);
+ Obj.New=Runtime.Ctor(function()
+ {
+ },Obj);
+ Var$1=UI.Var$1=Runtime.Class({},Obj,Var$1);
+ Var$1.Create$1=function(v)
  {
   return new ConcreteVar.New(false,Snap.New({
    $:2,
@@ -493,19 +508,6 @@ if (!console) {
  {
   return[kvp.K,kvp.V];
  };
- Obj=WebSharper.Obj=Runtime.Class({
-  Equals:function(obj)
-  {
-   return this===obj;
-  },
-  GetHashCode:function()
-  {
-   return -1;
-  }
- },null,Obj);
- Obj.New=Runtime.Ctor(function()
- {
- },Obj);
  attr=HtmlModule.attr=Runtime.Class({},Obj,attr);
  Var=UI.Var=Runtime.Class({},Obj,Var);
  Var.New=Runtime.Ctor(function()
