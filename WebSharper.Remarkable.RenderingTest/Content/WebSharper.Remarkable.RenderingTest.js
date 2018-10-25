@@ -332,7 +332,8 @@ if (!console) {
         trace: ignore,
         warn: ignore
     }
-};
+}
+;
 (function () {
     var lastTime = 0;
     var vendors = ['webkit', 'moz'];
@@ -361,7 +362,7 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Remarkable,RenderingTest,Client,Obj,UI,Var$1,Operators,HtmlModule,attr,Var,Doc,ConcreteVar,Snap,JavaScript,Pervasives,AttrProxy,View,Array,Unchecked,EventTarget,Arrays,Docs,Client$1,Templates,Abbrev,Fresh,DomUtility,Seq,AttrModule,Attrs,JS,DocElemNode,Node,Collections,Dictionary,Enumerator,T,CharacterData,Attrs$1,Dyn,SC$1,SC$2,HashSet,WindowOrWorkerGlobalScope,SC$3,SC$4,Elt,DictionaryUtil,Object,Prepare,Slice,KeyCollection,An,Settings,Mailbox,Updates,List,T$1,Strings,Docs$1,RunState,NodeSet,Anims,SC$5,SC$6,Concurrency,AppendList,DynamicAttrNode,Easing,AsyncBody,SC$7,CT,HashSet$1,HashSetUtil,Queue,Scheduler,CancellationTokenSource,DomNodes,Error,OperationCanceledException,Lazy,SC$8,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,$,console,Date;
+ var Global,WebSharper,Remarkable,RenderingTest,Client,Obj,UI,Var$1,Operators,HtmlModule,attr,Var,Doc,ConcreteVar,Snap,JavaScript,Pervasives,AttrProxy,View,Array,Unchecked,EventTarget,Arrays,Docs,DomUtility,Client$1,Templates,Abbrev,Fresh,Seq,AttrModule,Attrs,JS,DocElemNode,Node,Object,Collections,Dictionary,Enumerator,T,CharacterData,Attrs$1,Dyn,SC$1,WindowOrWorkerGlobalScope,SC$2,SC$3,HashSet,SC$4,Elt,DictionaryUtil,Prepare,Slice,KeyCollection,An,Settings,Mailbox,Updates,List,T$1,Strings,Docs$1,RunState,NodeSet,Anims,SC$5,SC$6,Concurrency,AppendList,DynamicAttrNode,Easing,AsyncBody,SC$7,CT,HashSet$1,HashSetUtil,Queue,Scheduler,CancellationTokenSource,DomNodes,Error,OperationCanceledException,Lazy,SC$8,LazyExtensionsProxy,LazyRecord,IntelliFactory,Runtime,console,Date;
  Global=self;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Remarkable=WebSharper.Remarkable=WebSharper.Remarkable||{};
@@ -386,17 +387,18 @@ if (!console) {
  EventTarget=Global.EventTarget;
  Arrays=WebSharper.Arrays=WebSharper.Arrays||{};
  Docs=UI.Docs=UI.Docs||{};
+ DomUtility=UI.DomUtility=UI.DomUtility||{};
  Client$1=UI.Client=UI.Client||{};
  Templates=Client$1.Templates=Client$1.Templates||{};
  Abbrev=UI.Abbrev=UI.Abbrev||{};
  Fresh=Abbrev.Fresh=Abbrev.Fresh||{};
- DomUtility=UI.DomUtility=UI.DomUtility||{};
  Seq=WebSharper.Seq=WebSharper.Seq||{};
  AttrModule=UI.AttrModule=UI.AttrModule||{};
  Attrs=UI.Attrs=UI.Attrs||{};
  JS=JavaScript.JS=JavaScript.JS||{};
  DocElemNode=UI.DocElemNode=UI.DocElemNode||{};
  Node=Global.Node;
+ Object=Global.Object;
  Collections=WebSharper.Collections=WebSharper.Collections||{};
  Dictionary=Collections.Dictionary=Collections.Dictionary||{};
  Enumerator=WebSharper.Enumerator=WebSharper.Enumerator||{};
@@ -405,14 +407,13 @@ if (!console) {
  Attrs$1=Client$1.Attrs=Client$1.Attrs||{};
  Dyn=Attrs$1.Dyn=Attrs$1.Dyn||{};
  SC$1=Global.StartupCode$WebSharper_UI$Attr_Client=Global.StartupCode$WebSharper_UI$Attr_Client||{};
- SC$2=Global.StartupCode$WebSharper_UI$Templates=Global.StartupCode$WebSharper_UI$Templates||{};
- HashSet=Collections.HashSet=Collections.HashSet||{};
  WindowOrWorkerGlobalScope=Global.WindowOrWorkerGlobalScope;
- SC$3=Global.StartupCode$WebSharper_UI$DomUtility=Global.StartupCode$WebSharper_UI$DomUtility||{};
+ SC$2=Global.StartupCode$WebSharper_UI$DomUtility=Global.StartupCode$WebSharper_UI$DomUtility||{};
+ SC$3=Global.StartupCode$WebSharper_UI$Templates=Global.StartupCode$WebSharper_UI$Templates||{};
+ HashSet=Collections.HashSet=Collections.HashSet||{};
  SC$4=Global.StartupCode$WebSharper_UI$Abbrev=Global.StartupCode$WebSharper_UI$Abbrev||{};
  Elt=UI.Elt=UI.Elt||{};
  DictionaryUtil=Collections.DictionaryUtil=Collections.DictionaryUtil||{};
- Object=Global.Object;
  Prepare=Templates.Prepare=Templates.Prepare||{};
  Slice=WebSharper.Slice=WebSharper.Slice||{};
  KeyCollection=Collections.KeyCollection=Collections.KeyCollection||{};
@@ -450,7 +451,6 @@ if (!console) {
  LazyRecord=LazyExtensionsProxy.LazyRecord=LazyExtensionsProxy.LazyRecord||{};
  IntelliFactory=Global.IntelliFactory;
  Runtime=IntelliFactory&&IntelliFactory.Runtime;
- $=Global.jQuery;
  console=Global.console;
  Date=Global.Date;
  Client.Main=function()
@@ -517,7 +517,6 @@ if (!console) {
  Doc=UI.Doc=Runtime.Class({},Obj,Doc);
  Doc.Verbatim=function(html)
  {
-  var m;
   return Doc.Mk(Array.MapTreeReduce(function(n)
   {
    return Unchecked.Equals(n.nodeType,Node.TEXT_NODE)?{
@@ -534,13 +533,13 @@ if (!console) {
     $0:x,
     $1:y
    };
-  },(m=$.parseHTML(html),Unchecked.Equals(m,null)?[]:m)),View.Const());
+  },DomUtility.ChildrenArray(DomUtility.ParseHTMLIntoFakeRoot(html))),View.Const());
  };
  Doc.TextNode=function(v)
  {
   return Doc.Mk({
    $:5,
-   $0:DomUtility.CreateText(v)
+   $0:self.document.createTextNode(v)
   },View.Const());
  };
  Doc.InputArea=function(attr$1,_var)
@@ -557,7 +556,7 @@ if (!console) {
  Doc.RunById=function(id,tr)
  {
   var m;
-  m=DomUtility.Doc().getElementById(id);
+  m=self.document.getElementById(id);
   Unchecked.Equals(m,null)?Operators.FailWith("invalid id: "+id):Doc.Run(m,tr);
  };
  Doc.Element=function(name,attr$1,children)
@@ -565,12 +564,12 @@ if (!console) {
   var a,a$1;
   a=AttrProxy.Concat(attr$1);
   a$1=Doc.Concat(children);
-  return Elt.New(DomUtility.CreateElement(name),a,a$1);
+  return Elt.New(self.document.createElement(name),a,a$1);
  };
  Doc.InputInternal=function(elemTy,attr$1)
  {
   var el;
-  el=DomUtility.CreateElement(elemTy);
+  el=self.document.createElement(elemTy);
   return Elt.New(el,AttrProxy.Concat(attr$1(el)),Doc.get_Empty());
  };
  Doc.BindView=function(f,view)
@@ -884,7 +883,7 @@ if (!console) {
  {
   return Attrs.Static(function(el)
   {
-   DomUtility.SetAttr(el,name,value);
+   el.setAttribute(name,value);
   });
  };
  AttrProxy.Concat=function(xs)
@@ -1428,6 +1427,73 @@ if (!console) {
   }),DomNodes.Except(DomNodes.DocChildren(el),DomNodes.Children(el.El,Runtime.GetOptional(el.Delimiters))));
   ins(el.Children,(m=Runtime.GetOptional(el.Delimiters),m!=null&&m.$==1?m.$0[1]:null));
  };
+ DomUtility.ParseHTMLIntoFakeRoot=function(elem)
+ {
+  var root,tag,m,p,w;
+  root=self.document.createElement("div");
+  return!DomUtility.rhtml().test(elem)?(root.appendChild(self.document.createTextNode(elem)),root):(tag=(m=DomUtility.rtagName().exec(elem),Unchecked.Equals(m,null)?"":Arrays.get(m,1).toLowerCase()),(p=(w=(DomUtility.wrapMap())[tag],w?w:DomUtility.defaultWrap()),(root.innerHTML=p[1]+elem.replace(DomUtility.rxhtmlTag(),"<$1></$2>")+p[2],function(elt,a)
+  {
+   var i;
+   while(true)
+    if(a===0)
+     return elt;
+    else
+     {
+      i=a;
+      elt=elt.lastChild;
+      a=i-1;
+     }
+  }(root,p[0]))));
+ };
+ DomUtility.ChildrenArray=function(element)
+ {
+  var a,i,$1;
+  a=[];
+  for(i=0,$1=element.childNodes.length-1;i<=$1;i++)a.push(element.childNodes[i]);
+  return a;
+ };
+ DomUtility.rhtml=function()
+ {
+  SC$2.$cctor();
+  return SC$2.rhtml;
+ };
+ DomUtility.wrapMap=function()
+ {
+  SC$2.$cctor();
+  return SC$2.wrapMap;
+ };
+ DomUtility.defaultWrap=function()
+ {
+  SC$2.$cctor();
+  return SC$2.defaultWrap;
+ };
+ DomUtility.rxhtmlTag=function()
+ {
+  SC$2.$cctor();
+  return SC$2.rxhtmlTag;
+ };
+ DomUtility.rtagName=function()
+ {
+  SC$2.$cctor();
+  return SC$2.rtagName;
+ };
+ DomUtility.IterSelector=function(el,selector,f)
+ {
+  var l,i,$1;
+  l=el.querySelectorAll(selector);
+  for(i=0,$1=l.length-1;i<=$1;i++)f(l[i]);
+ };
+ DomUtility.InsertAt=function(parent,pos,node)
+ {
+  var m;
+  if(!(node.parentNode===parent&&pos===(m=node.nextSibling,Unchecked.Equals(m,null)?null:m)))
+   parent.insertBefore(node,pos);
+ };
+ DomUtility.RemoveNode=function(parent,el)
+ {
+  if(el.parentNode===parent)
+   parent.removeChild(el);
+ };
  Templates.LoadLocalTemplates=function(baseName)
  {
   !Templates.LocalTemplatesLoaded()?(Templates.set_LocalTemplatesLoaded(true),Templates.LoadNestedTemplates(self.document.body,"")):void 0;
@@ -1435,17 +1501,17 @@ if (!console) {
  };
  Templates.LocalTemplatesLoaded=function()
  {
-  SC$2.$cctor();
-  return SC$2.LocalTemplatesLoaded;
+  SC$3.$cctor();
+  return SC$3.LocalTemplatesLoaded;
  };
  Templates.set_LocalTemplatesLoaded=function($1)
  {
-  SC$2.$cctor();
-  SC$2.LocalTemplatesLoaded=$1;
+  SC$3.$cctor();
+  SC$3.LocalTemplatesLoaded=$1;
  };
  Templates.LoadNestedTemplates=function(root,baseName)
  {
-  var loadedTpls,rawTpls,wsTemplates,i,$1,node,name,wsChildrenTemplates,i$1,$2,node$1,name$1,els,instantiated;
+  var loadedTpls,rawTpls,wsTemplates,i,$1,node,name,wsChildrenTemplates,i$1,$2,node$1,name$1,instantiated;
   function prepareTemplate(name$2)
   {
    var m,o;
@@ -1464,10 +1530,7 @@ if (!console) {
      m[0]?(instantiated.Add(name$2),rawTpls.Remove(name$2),Templates.PrepareTemplateStrict(baseName,{
       $:1,
       $0:name$2
-     },m[1][0],{
-      $:1,
-      $0:m[1][1]
-     },{
+     },m[1],{
       $:1,
       $0:prepareTemplate
      })):console.warn(instantiated.Contains(name$2)?"Encountered loop when instantiating "+name$2:"Local template does not exist: "+name$2);
@@ -1480,14 +1543,14 @@ if (!console) {
    node=wsTemplates[i];
    name=node.getAttribute("ws-template").toLowerCase();
    node.removeAttribute("ws-template");
-   rawTpls.set_Item(name,[[node],Templates.FakeRootSingle(node)]);
+   rawTpls.set_Item(name,Templates.FakeRootSingle(node));
   }
   wsChildrenTemplates=root.querySelectorAll("[ws-children-template]");
   for(i$1=0,$2=wsChildrenTemplates.length-1;i$1<=$2;i$1++){
    node$1=wsChildrenTemplates[i$1];
    name$1=node$1.getAttribute("ws-children-template").toLowerCase();
    node$1.removeAttribute("ws-children-template");
-   rawTpls.set_Item(name$1,(els=DomUtility.ChildrenArray(node$1),[els,Templates.FakeRoot(els)]));
+   rawTpls.set_Item(name$1,Templates.FakeRoot(node$1));
   }
   instantiated=new HashSet.New$3();
   while(rawTpls.count>0)
@@ -1495,8 +1558,8 @@ if (!console) {
  };
  Templates.LoadedTemplates=function()
  {
-  SC$2.$cctor();
-  return SC$2.LoadedTemplates;
+  SC$3.$cctor();
+  return SC$3.LoadedTemplates;
  };
  Templates.LoadedTemplateFile=function(name)
  {
@@ -1515,22 +1578,25 @@ if (!console) {
  };
  Templates.FakeRootSingle=function(el)
  {
-  var m,m$1,n;
+  var m,m$1,n,fakeroot;
   el.removeAttribute("ws-template");
   m=el.getAttribute("ws-replace");
   m===null?void 0:(el.removeAttribute("ws-replace"),m$1=el.parentNode,Unchecked.Equals(m$1,null)?void 0:(n=self.document.createElement(el.tagName),n.setAttribute("ws-replace",m),m$1.replaceChild(n,el)));
-  return Templates.FakeRoot([el]);
- };
- Templates.FakeRoot=function(els)
- {
-  var fakeroot,i,$1;
   fakeroot=self.document.createElement("div");
-  for(i=0,$1=els.length-1;i<=$1;i++)fakeroot.appendChild(Arrays.get(els,i));
+  fakeroot.appendChild(el);
   return fakeroot;
  };
- Templates.PrepareTemplateStrict=function(baseName,name,els,root,prepareLocalTemplate)
+ Templates.FakeRoot=function(parent)
  {
-  var fakeroot,name$1;
+  var fakeroot;
+  fakeroot=self.document.createElement("div");
+  while(parent.hasChildNodes())
+   fakeroot.appendChild(parent.firstChild);
+  return fakeroot;
+ };
+ Templates.PrepareTemplateStrict=function(baseName,name,fakeroot,prepareLocalTemplate)
+ {
+  var name$1;
   function recF(recI,$1)
   {
    var next,m,$2,x,f,name$2,p,instName,instBaseName,d,t,instance,usedHoles,mappings,attrs,i,$3,name$3,m$1,i$1,$4,n,singleTextFill,i$2,$5,n$1;
@@ -1637,12 +1703,13 @@ if (!console) {
    var m,name$2,m$1;
    function fillHole(p,n)
    {
-    var parsed,i,$1;
+    var parsed;
     if(name$2==="title"&&fillWith.hasChildNodes())
      {
-      parsed=$.parseHTML(fillWith.textContent);
+      parsed=DomUtility.ParseHTMLIntoFakeRoot(fillWith.textContent);
       fillWith.removeChild(fillWith.firstChild);
-      for(i=0,$1=parsed.length-1;i<=$1;i++)fillWith.appendChild(Arrays.get(parsed,i));
+      while(parsed.hasChildNodes())
+       fillWith.appendChild(parsed.firstChild);
      }
     else
      null;
@@ -1691,10 +1758,9 @@ if (!console) {
   {
    return recF(1,el);
   }
-  fakeroot=root==null?Templates.FakeRoot(els):root.$0;
   name$1=(name==null?"":name.$0).toLowerCase();
   Templates.LoadedTemplateFile(baseName).set_Item(name$1,fakeroot);
-  Arrays.length(els)>0?(function(el)
+  fakeroot.hasChildNodes()?(function(el)
   {
    var m,m$1,name$2,name$3;
    while(true)
@@ -1712,7 +1778,7 @@ if (!console) {
          Templates.PrepareTemplateStrict(baseName,{
           $:1,
           $0:name$2
-         },DomUtility.ChildrenArray(m$1),null,null);
+         },m$1,null);
          el=el;
         }
       }
@@ -1726,26 +1792,21 @@ if (!console) {
        el=el;
       }
     }
-  }(fakeroot),convertNodeAndSiblings(Arrays.get(els,0))):void 0;
+  }(fakeroot),convertNodeAndSiblings(fakeroot.firstChild)):void 0;
  };
  Templates.PrepareSingleTemplate=function(baseName,name,el)
  {
-  var root,e,r;
+  var root;
   root=Templates.FakeRootSingle(el);
-  e=[el];
-  r={
-   $:1,
-   $0:root
-  };
   return function(p)
   {
-   Templates.PrepareTemplateStrict(baseName,name,e,r,p);
+   Templates.PrepareTemplateStrict(baseName,name,root,p);
   };
  };
  Templates.TextHoleRE=function()
  {
-  SC$2.$cctor();
-  return SC$2.TextHoleRE;
+  SC$3.$cctor();
+  return SC$3.TextHoleRE;
  };
  Fresh.Int=function()
  {
@@ -1761,47 +1822,6 @@ if (!console) {
  {
   SC$4.$cctor();
   return SC$4.counter;
- };
- DomUtility.CreateText=function(s)
- {
-  return DomUtility.Doc().createTextNode(s);
- };
- DomUtility.SetAttr=function(el,name,value)
- {
-  el.setAttribute(name,value);
- };
- DomUtility.Doc=function()
- {
-  SC$3.$cctor();
-  return SC$3.Doc;
- };
- DomUtility.CreateElement=function(name)
- {
-  return DomUtility.Doc().createElement(name);
- };
- DomUtility.ChildrenArray=function(element)
- {
-  var a,i,$1;
-  a=[];
-  for(i=0,$1=element.childNodes.length-1;i<=$1;i++)a.push(element.childNodes[i]);
-  return a;
- };
- DomUtility.IterSelector=function(el,selector,f)
- {
-  var l,i,$1;
-  l=el.querySelectorAll(selector);
-  for(i=0,$1=l.length-1;i<=$1;i++)f(l[i]);
- };
- DomUtility.InsertAt=function(parent,pos,node)
- {
-  var m;
-  if(!(node.parentNode===parent&&pos===(m=node.nextSibling,Unchecked.Equals(m,null)?null:m)))
-   parent.insertBefore(node,pos);
- };
- DomUtility.RemoveNode=function(parent,el)
- {
-  if(el.parentNode===parent)
-   parent.removeChild(el);
  };
  Seq.append=function(s1,s2)
  {
@@ -2369,10 +2389,31 @@ if (!console) {
  };
  SC$2.$cctor=function()
  {
+  var table;
   SC$2.$cctor=Global.ignore;
-  SC$2.LoadedTemplates=new Dictionary.New$5();
-  SC$2.LocalTemplatesLoaded=false;
-  SC$2.TextHoleRE="\\${([^}]+)}";
+  SC$2.rxhtmlTag=new Global.RegExp("<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\\w:]+)[^>]*)\\/>","gi");
+  SC$2.rtagName=new Global.RegExp("<([\\w:]+)");
+  SC$2.rhtml=new Global.RegExp("<|&#?\\w+;");
+  SC$2.wrapMap=(table=[1,"<table>","</table>"],{
+   option:[1,"<select multiple='multiple'>","</select>"],
+   legend:[1,"<fieldset>","</fieldset>"],
+   area:[1,"<map>","</map>"],
+   param:[1,"<object>","</object>"],
+   thead:table,
+   tbody:table,
+   tfoot:table,
+   tr:[2,"<table><tbody>","</tbody></table>"],
+   col:[2,"<table><colgroup>","</colgoup></table>"],
+   td:[3,"<table><tbody><tr>","</tr></tbody></table>"]
+  });
+  SC$2.defaultWrap=[0,"",""];
+ };
+ SC$3.$cctor=function()
+ {
+  SC$3.$cctor=Global.ignore;
+  SC$3.LoadedTemplates=new Dictionary.New$5();
+  SC$3.LocalTemplatesLoaded=false;
+  SC$3.TextHoleRE="\\${([^}]+)}";
  };
  HashSet=Collections.HashSet=Runtime.Class({
   Add:function(item)
@@ -2500,11 +2541,6 @@ if (!console) {
  {
   HashSet.New$4.call(this,init,Unchecked.Equals,Unchecked.Hash);
  },HashSet);
- SC$3.$cctor=function()
- {
-  SC$3.$cctor=Global.ignore;
-  SC$3.Doc=self.document;
- };
  SC$4.$cctor=function()
  {
   SC$4.$cctor=Global.ignore;

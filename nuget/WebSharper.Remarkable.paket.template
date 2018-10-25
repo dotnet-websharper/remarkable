@@ -16,4 +16,4 @@ files
     ../WebSharper.Remarkable/bin/Release/netstandard2.0/WebSharper.Remarkable.dll ==> lib/netstandard2.0
     ../WebSharper.Remarkable/bin/Release/netstandard2.0/WebSharper.Remarkable.xml ==> lib/netstandard2.0
 dependencies
-        WebSharper ~> 4.5.2
+        WebSharper ~> 4.5.4
