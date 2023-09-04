@@ -21,7 +21,6 @@ namespace WebSharper.Remarkable.RenderingTest
 
 open WebSharper
 open WebSharper.JavaScript
-open WebSharper.JQuery
 open WebSharper.Remarkable
 
 [<JavaScript>]
