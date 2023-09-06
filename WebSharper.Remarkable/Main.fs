@@ -23,7 +23,41 @@ open WebSharper
 open WebSharper.InterfaceGenerator
 
 module Definition =
-    let Remarkable = Class "Remarkable"
+    let Remarkable = 
+        Class "Remarkable"
+        |> Import "Remarkable" "remarkable"
+    let Utils =
+        Class "Utils"
+        |> Import "utils" "remarkable"
+
+    let Ruler =
+        Class "Ruler"
+        |> WithSourceName "ruler"
+        |+> Instance [
+            "enable" => (!| T<string> * !? T<bool>) ^-> T<unit>
+            "disable" => !| T<string> ^-> T<unit>
+        ]
+
+    let WithRuler cl = cl |+> Instance [ "ruler" =? Ruler ]
+    let ParserBlock =
+        Class "ParserBlock" 
+        |> WithRuler
+    let ParserCore =
+        Class "ParserCore"
+        |> WithRuler
+    let ParserInline =
+        Class "ParserInline"
+        |> WithRuler
+    
+
+
+    Utils
+        |+> Instance [
+            "isValidEntityCode" => T<char> ^-> T<bool>
+            "fromCodePoint" => T<char> ^-> T<string>
+            "replaceEntities" => T<string> ^-> T<string>
+        ]
+        |> ignore
   //  let StateCore = Class "StateCore"
 
 
@@ -36,7 +70,6 @@ module Definition =
                 "xhtmlOut", T<bool>
                 "breaks", T<bool>
                 "langPrefix", T<string>
-                "linkify", T<bool>
                 "linkTarget", T<string>
 
                 "typographer", T<bool>
@@ -48,15 +81,20 @@ module Definition =
     let Plugin = (Remarkable * Options) ^-> T<unit>
     Remarkable
         |+> Static [
-            Constructor (T<unit> + Options + T<string>)
+            Constructor (T<unit> + Options + T<string> + (T<string> * Options))
         ]
         |+> Instance [
             "set" => Options ^-> T<unit>
             "use" => (Plugin * Options) ^-> Remarkable
-//            "parse" => (T<string> * T<obj>) ^-> T<string[]>
+            "configure" => !| T<obj>^-> T<unit>
+            "parse" => (T<string> * T<obj>) ^-> T<string[]>
             "render" => (T<string> * !? T<obj>) ^-> T<string>
-//            "parseInline" => (T<string> * T<obj>) ^-> T<string[]>
-//            "renderInline" => (T<string> * !? T<obj>) ^-> T<string>
+            "parseInline" => (T<string> * T<obj>) ^-> T<string[]>
+            "renderInline" => (T<string> * !? T<obj>) ^-> T<string>
+
+            "inline" =? ParserInline
+            "block" =? ParserBlock
+            "core" =? ParserCore
         ]|> ignore
 
  
@@ -68,10 +106,17 @@ module Definition =
     let Assembly =
         Assembly [
             Namespace "WebSharper.Remarkable.Resources" [
-                Resource "Js" "https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"
-                |> AssemblyWide
+                //Resource "Js" "https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"
+                //|> AssemblyWide
+            ]
+            Namespace "WebSharper.Remarkable.Bindings" [
             ]
             Namespace "WebSharper.Remarkable" [
+                ParserBlock
+                ParserCore
+                ParserInline
+                Ruler
+                Utils
                 Options
                 Remarkable
             //    StateCore

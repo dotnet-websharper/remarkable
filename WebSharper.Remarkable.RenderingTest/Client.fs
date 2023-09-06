@@ -37,12 +37,12 @@ module Client =
         remarkableConfig.XhtmlOut <- false
         remarkableConfig.Breaks <- false
         remarkableConfig.LangPrefix <- "language-"
-        remarkableConfig.Linkify <- true
         remarkableConfig.LinkTarget <- ""
         remarkableConfig.Typographer <- false
         remarkableConfig.Quotes <- "'����'"
 
         let md = new Remarkable.Remarkable(remarkableConfig)
+        
         let rvInput = Var.Create ""
         div [] [
             h1 [] [text "WebSharper.Remarkable extension sample page"]
