@@ -10,7 +10,7 @@ licenseUrl https://github.com/dotnet-websharper/remarkable/blob/master/LICENSE.m
 iconUrl https://github.com/dotnet-websharper/core/raw/websharper50/tools/WebSharper.png
 projectUrl https://github.com/dotnet-websharper/remarkable
 description
-    WebSharper Extension for remarkable 1.7.1
+    WebSharper Extension for remarkable 2.0.1+
 tags
     Web JavaScript F# C#
 files
