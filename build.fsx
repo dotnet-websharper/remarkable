@@ -29,6 +29,16 @@ open WebSharper.Fake
 
 let targets =
     WSTargets.Default (fun () -> GetSemVerOf "WebSharper" |> ComputeVersion)
+    |> fun args ->
+        { args with
+            Attributes =
+                    [
+                        AssemblyInfo.Company "IntelliFactory"
+                        AssemblyInfo.Copyright "(c) IntelliFactory 2023"
+                        AssemblyInfo.Title "https://github.com/dotnet-websharper/remarkable"
+                        AssemblyInfo.Product "WebSharper Remarkable 2.0.1+"
+                    ]
+        }
     |> MakeTargets
 
 Target.runOrDefault "Build"
